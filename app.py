@@ -27,8 +27,8 @@ if cohort:
 col1, col2, col3, col4, col5 = st.columns(5)
 col1.metric("Total Users", f"{filtered.shape[0]:,}")
 col2.metric("Funnel Completion Rate", f"{filtered['completed_all_steps'].mean()*100:.1f}%" if filtered.shape[0] > 0 else "0%")
-col3.metric("Avg Time to Complete", f"{filtered['total_time_to_complete_sec'].mean()/60:.1f} min" if filtered['total_time_to_complete_sec'].mean() > 0 else "N/A")
-col4.metric("Tooltip CTR", f"{filtered['tooltip_seen'].mean()*100:.1f}%" if filtered.shape[0] > 0 else "0%")
+col3.metric("Avg Time to Complete", f"{filtered.loc[filtered["completed_all_steps"] == 1, "total_time_to_complete_sec"].mean()/60:.1f} min" if filtered.loc[filtered["completed_all_steps"] == 1, "total_time_to_complete_sec"].notna().any() else "N/A")
+col4.metric("Tooltip Exposure Rate", f"{filtered['tooltip_seen'].mean()*100:.1f}%" if filtered.shape[0] > 0 else "0%")
 col5.metric("Blocker Rate", f"{filtered['blocker_event_occurred'].mean()*100:.1f}%" if filtered.shape[0] > 0 else "0%")
 
 # Funnel Drop-Off Chart
@@ -38,7 +38,7 @@ drop_fig = px.bar(
     x=[f"Step {i}" for i in step_counts.index],
     y=step_counts.values,
     labels={"x": "Drop-Off Step", "y": "Users"},
-    title="Number of Users Dropping at Each Step"
+    title="Users by Recorded Drop-Off Step"
 )
 st.plotly_chart(drop_fig, use_container_width=True)
 
