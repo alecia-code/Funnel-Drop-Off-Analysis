@@ -1,36 +1,30 @@
-# 🧭 Funnel Drop-Off Analysis – SaaS Onboarding Dashboard
+# Funnel Drop Off Analysis
 
-This project simulates the onboarding funnel of a Grammarly-style SaaS product to analyze where users drop off and why. It includes step timing, UX blockers, and intent-based segments (Trial vs Paid) to uncover user friction.
+**Portfolio case study | Synthetic data | Python, pandas, Streamlit, Plotly**
 
-## 📊 Features
-- KPI Cards: Completion Rate, Avg Time to Complete, Tooltip CTR, Blocker Rate
-- Filters: User Intent, Device Type, Cohort
-- Visuals:
-  - Drop-Off by Step
-  - Avg Step Time by Segment (Heatmap)
-  - Funnel Completion by Cohort
-  - Box Plot: Time to Complete by Segment
-  - Histogram: Validation Errors per User
+## Business question
+Investigate onboarding friction, incomplete journeys, validation errors, and cohort differences.
 
-## 🧪 Use Cases
-- Diagnose onboarding drop-off
-- Identify friction caused by tooltips, blockers, or validation errors
-- Measure impact of trial vs paid behavior
-- Track cohort performance over time
+## Analyst approach
+1. Define the operational decision and measurable KPIs.
+2. Segment the simulated records using dashboard controls.
+3. Compare trends and flag exceptions for investigation.
+4. Check metric definitions and filter consistency before presenting findings.
 
-## 🛠 Tools Used
-- Python
-- Streamlit
-- Pandas
-- Plotly
+## Dashboard and metrics
+The Streamlit app provides interactive filters, KPI summaries, and charts. Run it locally to explore how the selected segments change the results. The data is **synthetic**: findings are demonstrations of analytical methods, not observed customer outcomes.
 
-## 🚀 How to Run
-1. Clone this repo
-2. Install requirements: `pip install -r requirements.txt`
-3. Run: `streamlit run app.py`
+## Quality assurance and interpretation
+Tooltip exposure is not click-through rate. Completion time is calculated among completed journeys. Drop-off-step counts reflect the source field, not a sequential survival funnel.
 
-## 📁 Files
-- `app.py`: Streamlit dashboard
-- `onboarding_funnel_data.csv`: Simulated dataset
-- `requirements.txt`: Project dependencies
-- `funnel_case_study.docx`: Case study summary
+**Validation checklist:** confirm the dataset loads; verify KPI numerators/denominators against pandas calculations; test each filter alone and combined; check zero-row and zero-denominator selections; confirm every chart responds to the same filtered dataset; review charts for misleading causal claims.
+
+## Tools and reproduction
+```bash
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+The CSV in this repository is simulated sample data. The original case-study document is retained as a supplemental artifact; this README documents the current analytical approach.
+
+## What this demonstrates
+Business problem framing, KPI design, data exploration, operational reporting, dashboard development, and analytical QA. This is an independent portfolio exercise, not a client engagement or production deployment.
